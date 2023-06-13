@@ -1,0 +1,82 @@
+<odoo>
+    <record id='course_form_view' model='ir.ui.view'>
+        <field name='name'>Course Form</field>
+        <field name='model'>training_center.course</field>
+        <field name='arch' type='xml'>
+            <form string='Course'>
+                <header>
+                    <button name="action_do_cancel" type="object" string="Cancel" states="new" groups="training_center.course_group_manager"/>
+                    <button name="action_do_progress" type="object" string="In Progress" states="new"/>
+                    <button name="action_do_complete" type="object" string="Complete" states="new"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,progress,completed"/>
+                </header>
+                <sheet>
+                    <!--div name='button_box' class='oe_button_box' / -->
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="descr"/>
+                            <field name="course_level"/>
+                            <field name="currency_id"/>
+                            <field name="price"/>
+                            <field name="active"/>
+                            <field name="start_date"/>
+                            <field name="remarks"/>
+                            <field name="remarks2"/>
+                            <field name="state" invisible="True"/>
+                            <field name="total_duration"/>
+                            <field name="deadline_date"/>
+                        </group>
+                        <group>
+                            <field name="company_id" attrs="{'readonly':[('state','=','completed')]}"/>
+                            <field name="teacher_ids" widget='many2many_tags'/>
+                            <field name="cover_image" widget="image"/>
+                            <field name='country_id'/>
+                            <field name='num_of_contents'/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Contents">
+                            <field name="course_items_ids">
+                                <tree>
+                                    <field name='name'/>
+                                    <field name='duration'/>
+                                </tree>
+                            </field>
+                        </page> 
+                    </notebook>   
+                </sheet>
+            </form>
+            <!-- Header -->
+            <!-- Sheet/Body -->
+
+            <!-- Footer-Log -->
+        </field>
+    </record>
+    <record id='course_tree_view' model='ir.ui.view'>
+        <field name='name'>Course Tree</field>
+        <field name='model'>training_center.course</field>
+        <field name='arch' type='xml'>
+            <tree decoration-muted="state in ['cancel']" decoration-primary="state=='completed'">
+                <field name='name'/>
+                <field name='state'/>
+                <field name='company_id'/>
+                <field name='course_level'/>
+                <field name='start_date'/>
+            </tree>
+        </field>
+    </record>
+    <record id="course_search_view" model="ir.ui.view">
+        <field name="name">Course filters</field>
+        <field name='model'>training_center.course</field>
+        <field name="arch" type='xml'>
+        <search>
+            <field name="company_id"/>
+            <filter name="filter_course_level_basic" string="Basic" domain="[('course_level','=','basic')]"/>
+            <filter name="filter_course_level_advanced" string="Advanced" domain="[('course_level','=','advanced')]"/>
+            
+        </search>
+        </field>
+    
+    </record>
+</odoo>

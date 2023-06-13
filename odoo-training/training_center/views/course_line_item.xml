@@ -1,0 +1,14 @@
+<odoo>
+    <record id='course_line_item_tree_view' model='ir.ui.view'>
+        <field name='name'>Course Line Item Tree</field>
+        <field name='model'>training_center.course.line.item</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name' />
+                <field name='course_id' />
+                <field name='duration' />
+
+            </tree>
+        </field>
+    </record>
+</odoo>

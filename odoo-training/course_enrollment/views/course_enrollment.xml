@@ -1,0 +1,66 @@
+<odoo>
+    <record id='course_enrollment_form_view' model='ir.ui.view'>
+        <field name='name'>Course Enrollment Form</field>
+        <field name='model'>course.enrollment</field>
+        <field name='arch' type='xml'>
+            <form string='Course'>
+                <header>
+                    <button name="action_do_cancel" type="object" string="Cancel" states="new"/>
+                    <button name="action_do_draft" type="object" string="Draft" states="new"/>
+                    <button name="action_do_confirmed" type="object" string="Comfirmed" states="new"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,draft,confirmed"/>
+                </header>
+                <sheet>
+                    <field name='member_image' widget='image' class='oe_avatar'/>
+                    <div class ='oe_title'>
+                        <label for = 'name'/>
+                        <h1>
+                            <field name='name'/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="member_id"/>
+                            <field name="enroll_date"/>
+                            <field name="course_id"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group>
+
+                            <field name="price"/>
+                            <field name="discount"/>
+                            <field name="total_amount"/>
+
+                        </group>
+
+                    </group>
+
+                </sheet>
+                <div class='oe_chatter'>
+                    <field name='message_follower_ids' widget='mail_followers'/>
+                    <field name='activity_ids' widget='mail_activity'/>
+                    <field name='message_ids' widget='mail_thread'/>
+                </div>
+            </form>
+            <!-- Header -->
+            <!-- Sheet/Body -->
+
+            <!-- Footer-Log -->
+        </field>
+    </record>
+    <record id='course_enrollment_tree_view' model='ir.ui.view'>
+        <field name='name'>Course Enrollment Tree</field>
+        <field name='model'>course.enrollment</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name'/>
+                <field name='enroll_date'/>
+                <field name='course_id'/>
+                <field name='price'/>
+                <field name='total_amount'/>
+            </tree>
+        </field>
+    </record>
+    
+</odoo>
